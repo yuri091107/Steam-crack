@@ -110,7 +110,7 @@ public class Testando {
         comboBox.addItem("steam_api"); //1
         
         //inicia a comboBox na opção abaixo
-        comboBox.setSelectedItem("game_ali123 (x64)");
+        comboBox.setSelectedItem("steam_api64");
 
         textField_1 = new JTextField();
         textField_1.setText(" Selecione a opção de crack ");
