@@ -1,5 +1,7 @@
 package com.mycompany.testando;
 
+import com.profesorfalken.jpowershell.PowerShell;
+import com.profesorfalken.jpowershell.PowerShellResponse;
 import java.awt.EventQueue;
 import java.io.*;
 import javax.swing.JFileChooser;
@@ -29,6 +31,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 
 public class Testando {
@@ -75,10 +79,9 @@ public class Testando {
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                FileNameExtensionFilter filtro = new FileNameExtensionFilter("Apenas .dll", "dll");
+                FileNameExtensionFilter filtro = new FileNameExtensionFilter("Apenas .dll ou .exe", "dll", "exe");
                 fileChooser.setAcceptAllFileFilterUsed(false);
                 fileChooser.addChoosableFileFilter(filtro);
-
                 
                 int resposta = fileChooser.showOpenDialog(null);
 
@@ -87,7 +90,7 @@ public class Testando {
                     System.out.println("Arquivo selecionado com sucesso! " + arquivo.getAbsoluteFile());
 
                 } else if (resposta == fileChooser.CANCEL_OPTION) {
-                    JOptionPane.showMessageDialog(null, "Selecione alguma dll");
+                    JOptionPane.showMessageDialog(null, "SELECIONE ALGUMA DLL OU EXECUTÁVEL!");
                 }
 
             }
@@ -107,7 +110,10 @@ public class Testando {
         comboBox.setBounds(259, 126, 127, 22);
         frame.getContentPane().add(comboBox);
         comboBox.addItem("steam_api64"); //0
-        comboBox.addItem("steam_api"); //1
+        comboBox.addItem("steam_api32"); //1
+        comboBox.addItem("SteamDRM"); //2
+        comboBox.addItem("online64"); //3
+        comboBox.addItem("online32"); //4
         
         //inicia a comboBox na opção abaixo
         comboBox.setSelectedItem("steam_api64");
@@ -156,6 +162,57 @@ public class Testando {
                        JOptionPane.showMessageDialog(null, "AÇÃO CONCLUÍDA COM SUCESSO!");
                     } catch(IOException bbbb) {
                         System.out.println("deu ruim " + bbbb.getMessage());
+                        JOptionPane.showMessageDialog(null, "NÃO FOI POSSÍVEL REALIZAR A AÇÃO!");
+                    }
+                }
+                
+                if(comboBox.getSelectedIndex() == 2) {
+                    File file = fileChooser.getSelectedFile();
+                    String caminho = file.getAbsolutePath();
+                    String executavel = new File("Steamless_CLI\\Steamless.CLI.exe").getAbsolutePath();
+                    //String teste = "C:\\Users\\MegaOS\\Documents\\teste\\A Game About Digging A Hole\\DiggingGame\\Binaries\\Win64\\DiggingGame.exe";
+                    //File file2 = new File(pasta, "Steamless.CLI.exe");
+                    
+                    String parametros = " --quiet" + " '" + caminho + "'";
+                    
+                    if(!parametros.isEmpty()) {
+                        PowerShellResponse response = PowerShell.executeSingleCommand(executavel + parametros);
+                        JOptionPane.showMessageDialog(null, "AÇÃO CONCLUÍDA COM SUCESSO!");
+                        System.out.println(response.getCommandOutput());
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "NÃO FOI POSSÍVEL REALIZAR A AÇÃO!");
+                    }
+                }
+                
+                if(comboBox.getSelectedIndex() == 3) {
+                    File file = fileChooser.getSelectedFile();
+                    String caminho = file.getAbsolutePath();
+                    String sla = new File("game_goldberg\\files\\steam_api64.dll").getAbsolutePath();
+                    File origem2 = new File(sla);
+                    File destino = new File(caminho);
+                     
+                    try {
+                        FileUtils.copyFile(origem2, destino);
+                       JOptionPane.showMessageDialog(null, "AÇÃO CONCLUÍDA COM SUCESSO!");
+                    } catch(IOException cccc) {
+                        System.out.println("deu ruim " + cccc.getMessage());
+                        JOptionPane.showMessageDialog(null, "NÃO FOI POSSÍVEL REALIZAR A AÇÃO!");
+                    }
+                }
+                
+                if(comboBox.getSelectedIndex() == 4) {
+                    File file = fileChooser.getSelectedFile();
+                    String caminho = file.getAbsolutePath();
+                    String sla = new File("game_goldberg\\files\\steam_api.dll").getAbsolutePath();
+                    File origem2 = new File(sla);
+                    File destino = new File(caminho);
+                     
+                    try {
+                        FileUtils.copyFile(origem2, destino);
+                       JOptionPane.showMessageDialog(null, "AÇÃO CONCLUÍDA COM SUCESSO!");
+                    } catch(IOException dddd) {
+                        System.out.println("deu ruim " + dddd.getMessage());
                         JOptionPane.showMessageDialog(null, "NÃO FOI POSSÍVEL REALIZAR A AÇÃO!");
                     }
                 }
