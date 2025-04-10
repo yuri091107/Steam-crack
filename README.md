@@ -49,12 +49,4 @@ Sugestões de melhoria, issues e contribuições são bem-vindas, desde que mant
 
 ---
 
-## 📚 Referências
-
-- Engenharia Reversa: Fundamentos e Práticas
-- Documentações públicas de APIs e ferramentas de depuração
-- Materiais acadêmicos sobre análise de executáveis
-
----
-
 > Desenvolvido com propósito acadêmico e responsabilidade. ⚖️
