@@ -37,12 +37,6 @@ O projeto foi criado para auxiliar estudantes e profissionais na compreensão de
 
 ---
 
-## 📄 Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE), permitindo uso e modificação com os devidos créditos, **desde que não seja utilizado para fins ilegais ou antiéticos**.
-
----
-
 ## 🙋‍♂️ Contribuições
 
 Sugestões de melhoria, issues e contribuições são bem-vindas, desde que mantenham o foco educacional e respeitem os termos legais.
